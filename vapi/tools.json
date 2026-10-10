@@ -1,0 +1,261 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "validate_field",
+      "description": "Validate one value the caller just gave. Returns valid true/false and a problem to explain.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "first_name",
+              "last_name",
+              "date_of_birth",
+              "sex",
+              "phone_number",
+              "email",
+              "address_line_1",
+              "address_line_2",
+              "city",
+              "state",
+              "zip_code",
+              "insurance_provider",
+              "insurance_member_id",
+              "preferred_language",
+              "emergency_contact_name",
+              "emergency_contact_phone"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "The value exactly as heard"
+          }
+        },
+        "required": [
+          "field",
+          "value"
+        ]
+      }
+    },
+    "server": {
+      "url": "https://YOUR-APP.vercel.app/vapi/webhook",
+      "secret": "REPLACE_WITH_VAPI_SECRET"
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "find_patient_by_phone",
+      "description": "Check whether a patient with this phone number already exists.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "phone_number": {
+            "type": "string",
+            "description": "10-digit U.S. phone number"
+          }
+        },
+        "required": [
+          "phone_number"
+        ]
+      }
+    },
+    "server": {
+      "url": "https://YOUR-APP.vercel.app/vapi/webhook",
+      "secret": "REPLACE_WITH_VAPI_SECRET"
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "register_patient",
+      "description": "Save a NEW patient after the caller has confirmed all details. Send only collected fields.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "Caller's first name"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Caller's last name"
+          },
+          "date_of_birth": {
+            "type": "string",
+            "description": "MM/DD/YYYY"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Male, Female, Other, or Decline to Answer"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "10-digit U.S. phone number"
+          },
+          "email": {
+            "type": "string",
+            "description": "Optional email"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Street address"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Optional apartment/suite/unit"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter state code or full state name"
+          },
+          "zip_code": {
+            "type": "string",
+            "description": "5-digit or ZIP+4"
+          },
+          "insurance_provider": {
+            "type": "string",
+            "description": "Optional insurer name"
+          },
+          "insurance_member_id": {
+            "type": "string",
+            "description": "Optional member ID"
+          },
+          "preferred_language": {
+            "type": "string",
+            "description": "Optional; default English"
+          },
+          "emergency_contact_name": {
+            "type": "string",
+            "description": "Optional"
+          },
+          "emergency_contact_phone": {
+            "type": "string",
+            "description": "Optional 10-digit U.S. number"
+          }
+        },
+        "required": [
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "sex",
+          "phone_number",
+          "address_line_1",
+          "city",
+          "state",
+          "zip_code"
+        ]
+      }
+    },
+    "server": {
+      "url": "https://YOUR-APP.vercel.app/vapi/webhook",
+      "secret": "REPLACE_WITH_VAPI_SECRET"
+    },
+    "messages": [
+      {
+        "type": "request-start",
+        "content": "One moment while I save that for you."
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "update_patient",
+      "description": "Update an EXISTING patient after verifying date of birth. Send only changed fields.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "patient_id": {
+            "type": "string",
+            "description": "patient_id returned by find_patient_by_phone"
+          },
+          "verify_date_of_birth": {
+            "type": "string",
+            "description": "Caller's date of birth, MM/DD/YYYY, used to verify identity"
+          },
+          "phone_number": {
+            "type": "string",
+            "description": "10-digit U.S. phone number"
+          },
+          "email": {
+            "type": "string",
+            "description": "Optional email"
+          },
+          "address_line_1": {
+            "type": "string",
+            "description": "Street address"
+          },
+          "address_line_2": {
+            "type": "string",
+            "description": "Optional apartment/suite/unit"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "2-letter state code or full state name"
+          },
+          "zip_code": {
+            "type": "string",
+            "description": "5-digit or ZIP+4"
+          },
+          "insurance_provider": {
+            "type": "string",
+            "description": "Optional insurer name"
+          },
+          "insurance_member_id": {
+            "type": "string",
+            "description": "Optional member ID"
+          },
+          "preferred_language": {
+            "type": "string",
+            "description": "Optional; default English"
+          },
+          "emergency_contact_name": {
+            "type": "string",
+            "description": "Optional"
+          },
+          "emergency_contact_phone": {
+            "type": "string",
+            "description": "Optional 10-digit U.S. number"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "Caller's first name"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Caller's last name"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Male, Female, Other, or Decline to Answer"
+          }
+        },
+        "required": [
+          "patient_id",
+          "verify_date_of_birth"
+        ]
+      }
+    },
+    "server": {
+      "url": "https://YOUR-APP.vercel.app/vapi/webhook",
+      "secret": "REPLACE_WITH_VAPI_SECRET"
+    },
+    "messages": [
+      {
+        "type": "request-start",
+        "content": "Let me update that for you."
+      }
+    ]
+  }
+]

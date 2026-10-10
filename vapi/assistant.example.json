@@ -1,0 +1,40 @@
+{
+  "name": "Patient Intake - Ava",
+  "firstMessage": "Hi, thanks for calling Maple Street Family Clinic. This is Ava. I can get you registered as a new patient. May I start with your first and last name?",
+  "model": {
+    "provider": "PICK_IN_DASHBOARD",
+    "model": "PICK_IN_DASHBOARD",
+    "temperature": 0.3,
+    "messages": [
+      {
+        "role": "system",
+        "content": "PASTE prompts/system_prompt.md (everything under the --- line)"
+      }
+    ],
+    "toolIds": [
+      "<ids of the 4 tools from vapi/tools.json>"
+    ],
+    "tools": [
+      {
+        "type": "endCall"
+      }
+    ]
+  },
+  "transcriber": {
+    "provider": "assembly-ai",
+    "language": "en"
+  },
+  "voice": "PICK_IN_DASHBOARD (Vapi's built-in voices are the cheapest)",
+  "server": {
+    "url": "https://YOUR-APP.vercel.app/vapi/webhook",
+    "secret": "REPLACE_WITH_VAPI_SECRET"
+  },
+  "serverMessages": [
+    "tool-calls",
+    "end-of-call-report"
+  ],
+  "endCallMessage": "Thanks for calling. Take care!",
+  "silenceTimeoutSeconds": 30,
+  "maxDurationSeconds": 600,
+  "_note": "Reference only. Model/voice/transcriber names change; pick them in the Vapi dashboard. See README step 6."
+}
